@@ -25,6 +25,7 @@ public class QuabibleProgram {
 	    gender.click();
 	    WebElement showmessage=driver.findElement(By.xpath("//button[@id='button-one' or @fdprocessedid='x12bkj']"));
 	    showmessage.click();
+	   
 	    WebElement patientgender=driver.findElement(By.xpath("//label[@for='inlineRadio21']"));
 	    patientgender.click();
 	    WebElement category=driver.findElement(By.xpath("//input[@value='19 to 44']"));
@@ -37,10 +38,13 @@ public class QuabibleProgram {
 	    Select select =new Select (selectcolour);
 	    select.selectByVisibleText("Red");
 	    
-	    //WebElement 
+	 
+	  
+	    
+	    
+	    
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stu
 		QuabibleProgram obj=new QuabibleProgram();
 		obj.quabible();
 	}
