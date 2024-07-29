@@ -1,9 +1,13 @@
 package Seleniumcommands;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 public class Commands {
 	public void webelementCommand()
@@ -46,6 +50,84 @@ public class Commands {
 		driver.close();
 		
 	}
+	public void  verifyValueFromDropdown()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://demo.guru99.com/test/newtours/register.php");
+		WebElement countrydropdown=driver.findElement(By.xpath("//select[@name='country']"));
+		Select select=new Select (countrydropdown);
+		select.selectByVisibleText("BURMA");
+		select.selectByIndex(4);
+		select.selectByValue("ANGUILLA");
+		
+		
+		
+		
+	}
+	public void getTotalDropDown()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://demo.guru99.com/test/newtours/register.php");
+		WebElement countrydropdown=driver.findElement(By.xpath("//select[@name='country']"));
+		Select select=new Select (countrydropdown);
+       List<WebElement>dropdown=select.getOptions();
+       System.out.println(dropdown.size());
+       driver.close();
+       
+		
+	}
+	public void verifyRightClick()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://demo.guru99.com/test/simple_context_menu.html");
+		WebElement rightclick=driver.findElement(By.xpath("//span[@class='context-menu-one btn btn-neutral']"));
+		Actions action= new Actions(driver);
+		action.contextClick(rightclick).build().perform();
+	}
+	
+	public void verifyDoubleClick()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://demo.guru99.com/test/simple_context_menu.html");
+		WebElement doubleclick=driver.findElement(By.xpath("//button[text()='Double-Click Me To See Alert']"));
+		Actions action= new Actions(driver);
+		action.contextClick(doubleclick).build().perform();
+	}
+	
+	public void mouseOver()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://demoqa.com/menu/");
+		WebElement mouseOver=driver.findElement(By.xpath("//a[text()='Main Item 2']"));
+		Actions action=new Actions(driver);
+		action.moveToElement(mouseOver).build().perform();
+	}
+	public void verifyDragandDrop()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://demoqa.com/droppable");
+		WebElement dragg=driver.findElement(By.id("draggable"));
+		WebElement drop=driver.findElement(By.id("droppable"));
+		Actions action=new Actions(driver);
+		action.dragAndDrop(dragg, drop).build().perform();
+	}
+	public void verifyDragandDropusingOffset()
+	{
+
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://demoqa.com/dragabble");
+		WebElement draganadrop=driver.findElement(By.xpath("dragBox"));
+		Actions action=new Actions(driver);
+		action.dragAndDropBy(draganadrop, 150, 200)	.build().perform();	
+	}
+
 public void verify_user_registration()
 {
 	WebDriver driver=new ChromeDriver();
@@ -71,11 +153,17 @@ lastName.sendKeys("Varghese");
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Commands  obj=new Commands ();
-		obj.isDisplayed();
-		obj.isSelected();
-		obj.isEnabled();
+		//obj.isDisplayed();
+		//obj.isSelected();
+		//obj.isEnabled();
 			//obj.verify_user_registration();
-		
+		//obj.verifyValueFromDropdown();
+		//obj.getTotalDropDown();
+		//obj.verifyRightClick();
+		obj.verifyDoubleClick();
+		//obj.mouseOver();
+		//obj.verifyDragandDrop();
+		//obj.verifyDragandDropusingOffset();
 	}
 
 }
