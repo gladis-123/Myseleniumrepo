@@ -209,6 +209,23 @@ public void verifyPromtAler()
 	
 	
 }
+public void verifyFrames()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demoqa.com/frames");
+	List<WebElement>iframetag=driver.findElements(By.tagName("i frame"));
+	int noOFTags=iframetag.size();
+	System.out.println("no of tag "+noOFTags);
+	//driver.switchTo().frame(0);
+	//driver.switchTo().frame("frame1");
+	WebElement frame=driver.findElement(By.id("frame1"));
+	driver.switchTo().frame(frame);
+	WebElement frameText=driver.findElement(By.id("sampleHeading"));
+	String text=frameText.getText();
+	System.out.println("Text "+text);
+	driver.close();
+}
 
 	public static void main(String[] args) throws AWTException {
 		// TODO Auto-generated method stub
@@ -226,9 +243,9 @@ public void verifyPromtAler()
 		//obj.verifyDragandDropusingOffset();
 		//obj.verifyKeyBoadrEvents();
 		//obj.verifySimpleAlert();
-		obj.verifyConformationAlert();
+		//obj.verifyConformationAlert();
 		//obj.verifyPromtAler();
-		
+		obj.verifyFrames();
 	}
 
 }
