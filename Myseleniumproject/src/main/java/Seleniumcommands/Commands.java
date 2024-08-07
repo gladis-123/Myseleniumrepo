@@ -4,7 +4,9 @@ import java.awt.AWTException;
 import java.awt.Event;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -226,6 +228,78 @@ public void verifyFrames()
 	System.out.println("Text "+text);
 	driver.close();
 }
+public void verifyMultipleWindowHandling()
+{
+
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demo.guru99.com/popup.php");	
+	String parentWindowHandleId=driver.getWindowHandle();
+			System.out.println("windowHandle"+parentWindowHandleId);
+	WebElement clickhere=driver.findElement(By.xpath("//a[text()='Click Here']"));
+	clickhere.click();
+	//String childWindowHandleId=drivers();
+	//System.out.println("CWH "+childWindowHandleId);
+	Set<String>eIdhandl=driver.getWindowHandles();
+	System.out.println("Hid "+eIdhandl);
+	Iterator<String>values=eIdhandl.iterator();
+	while(values.hasNext());
+	{
+		String currentid=values.next();
+		if(!currentid.equals(parentWindowHandleId))
+		{
+			
+			driver.switchTo().window(currentid);
+			WebElement email=driver.findElement(By.xpath("//input[@name='emailid']"));
+			email.sendKeys("annavarghese66123@gamil.com");
+			WebElement submit=driver.findElement(By.xpath("//input[@name='btnLogin']"));
+			submit.click();
+			driver.switchTo().defaultContent();
+		}
+		
+	}
+}
+public void verifyDynamicTable()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.get("https://money.rediff.com/indices/nse");
+	driver.manage().window().minimize();
+	WebElement showmore=driver.findElement(By.id("showMoreLess"));
+	showmore.click();
+	WebElement tableField=driver.findElement(By.xpath("//table[@id='dataTable']"));
+	//System.out.println(tableField.getText());
+	WebElement row=driver.findElement(By.xpath("//table[@id='dataTable']/tbody /tr[2]"));
+	System.out.println(row.getText());
+	List<WebElement>rows=tableField.findElements(By.tagName("tr"));
+	int rows_count=rows.size();
+	for(int i = 0;i< rows_count;i++)
+	{
+	List<WebElement>columns=rows.get(i).findElements(By.tagName("td"));
+			int column_count=columns.size();
+	for(int j=0;j<column_count;j++)
+	{
+	String cell_data=columns.get(j).getText();
+	if(cell_data.equals("NIFTY 500"))
+	{
+		System.out.println("the data "+columns.get(2).getText());
+	}
+	
+			
+	}
+}
+}
+public void verifyFileUpload()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.get("https://demo.guru99.com/test/upload/");
+	driver.manage().window().maximize();
+	WebElement choose_fld=driver.findElement(By.id("uploadfile_0"));
+	choose_fld.sendKeys("C:\\Users\\gladi\\git\\Myseleniumrepo\\Myseleniumproject\\src\\main\\resources\\Selenium Note.docx");
+	WebElement checkbox=driver.findElement(By.id("terms"));
+	checkbox.click();
+	WebElement submit_fld=driver.findElement(By.id("submitbutton"));
+	submit_fld.click();
+}
 
 	public static void main(String[] args) throws AWTException {
 		// TODO Auto-generated method stub
@@ -245,7 +319,10 @@ public void verifyFrames()
 		//obj.verifySimpleAlert();
 		//obj.verifyConformationAlert();
 		//obj.verifyPromtAler();
-		obj.verifyFrames();
+		//obj.verifyFrames();
+		//obj.verifyMultipleWindowHandling();
+		//obj. verifyDynamicTable();
+		obj.verifyFileUpload();
 	}
 
 }
