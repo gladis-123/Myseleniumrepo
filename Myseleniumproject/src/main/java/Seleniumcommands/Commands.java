@@ -282,6 +282,7 @@ public void verifyDynamicTable()
 	if(cell_data.equals("NIFTY 500"))
 	{
 		System.out.println("the data "+columns.get(2).getText());
+		
 	}
 	
 			
