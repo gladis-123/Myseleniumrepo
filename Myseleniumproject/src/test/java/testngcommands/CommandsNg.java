@@ -1,6 +1,7 @@
 package testngcommands;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -71,7 +72,7 @@ public void verifyIsDispalyed()
 	WebElement vote_displayed=driver.findElement(By.id("vote-poll-1"));
 	boolean isDisplayselected= vote_displayed.isDisplayed();
 	//System.out.println("Vote element is displayed "+isDisplayselected
-	Assert.assertTrue(isDisplayselected, "displayed");
+	Assert.assertTrue(isDisplayselected, "Not displayed");
 
 }
 @Test
@@ -84,7 +85,7 @@ public void is_enabled()
 		boolean isSubscriptionisenabled=subscription.isEnabled();
 		//System.out.println("Subscription button is enabled");
 		 
-		Assert.assertTrue(isSubscriptionisenabled, "enabled");
+		Assert.assertTrue(isSubscriptionisenabled, " Notenabled");
 }
 @Test
 public void	is_selected()
@@ -95,16 +96,27 @@ public void	is_selected()
 	isButtonSelected=gender.isSelected();
 	//System.out.println("gender element before selected "+isButtonSelected);
 	Assert.assertFalse(isButtonSelected, "false");
-	// gender.click();
+	 gender.click();
 	 isButtonSelected=gender.isSelected();
 	 //System.out.println("gender element after selected "+isButtonSelected);
 	Assert.assertTrue(isButtonSelected, "true");
 	}
 		
-
-	
-
-	
+@Test
+public void verify_javascript_sendkeys_and_click()
+{
+	driver.get("https://demowebshop.tricentis.com/");
+	JavascriptExecutor js=(JavascriptExecutor)driver;
+	js.executeScript("document.getElementById(\"newsletter-email\").value='anitha32@gmail.com'");
+	js.executeScript("document.getElementById(\"newsletter-subscribe-button\").click()");
+}
+@Test
+	public void verify_verticalscroll()
+	{
+		driver.get("https://demowebshop.tricentis.com/register");
+		JavascriptExecutor js=(JavascriptExecutor )driver;
+		js.executeScript("window.scrollBy(0,1000)");
+	}
 	
 }
 
